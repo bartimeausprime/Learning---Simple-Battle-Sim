@@ -3,6 +3,7 @@ player_attack = 0
 player_skills = 0
 player_defend = 0
 # Default Parameters for Player Stats
+playerstats = {"name":"0","maxhp":"0","curr_hp":"0"}
 player_name = 0
 player_max_health = 0
 player_curr_health = 0
