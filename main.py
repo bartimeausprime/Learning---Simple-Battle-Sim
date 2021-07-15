@@ -3,46 +3,23 @@ player_attack = 0
 player_skills = 0
 player_defend = 0
 # Default Parameters for Player Stats
-playerstats = {"name":"0","maxhp":"0","curr_hp":"0"}
-player_name = 0
-player_max_health = 0
-player_curr_health = 0
-player_max_mana = 0
-player_curr_mana = 0
-player_evasion = 0
-player_crit = 0
+player_stats = {"name":"0","max_hp":"0","curr_hp":"0","max_mp":"0","curr_mp":"0","evasion":"0","crit":"0"}
 # Default Parameters for Player Status
-player_regen = 0
-player_mana_regen = 0
-player_dot = 0
+player_status = {"regen":"0","mp_regen":"0","dot":"0"}
 # Default Player Attacks Damage
 player_atk =300
 # Default Player Skills
-player_heavy_atk = 400
-player_leech_hp = 200
-player_fireball = 500
-#
+player_skills = {"heavy_atk":"400","leech_hp":"200","fireball":"500"}
 #Critical Multiplier
 crit_multi = 2
-#
-#
 # Default Parameters for Monster Stats
-mons_name = 0
-mons_max_health = 0
-mons_curr_health = 0
-mons_max_mana = 0
-mons_curr_mana = 0
-mons_evasion = 0
-mons_crit = 0
+mons_stats = {"name":"0","max_hp":"0","curr_hp":"0","max_mp":"0","curr_mp":"0","evasion":"0","crit":"0"}
 # Default Parameters for Monster Status
-mons_regen = 0
-mons_mana_regen = 0
-mons_dot = 0
+mons_status = {"regen":"0","mp_regen":"0","dot":"0"}
 # Default Monster Attacks
 mons_atk = 200
 # Default Monster Skills
-mons_smash = 400
-mons_lick_poison = 100
+mons_skills = {"smash":"400","poison_lick":"100"}
 
 #
 #
