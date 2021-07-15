@@ -3,23 +3,23 @@ player_attack = 0
 player_skills = 0
 player_defend = 0
 # Default Parameters for Player Stats
-player_stats = {"name":"0","max_hp":"0","curr_hp":"0","max_mp":"0","curr_mp":"0","evasion":"0","crit":"0"}
+player_stats = {"name":0,"max_hp":0,"curr_hp":0,"max_mp":0,"curr_mp":0,"evasion":0,"crit":0}
 # Default Parameters for Player Status
-player_status = {"regen":"0","mp_regen":"0","dot":"0"}
+player_status = {"regen":0,"mp_regen":0,"dot":0}
 # Default Player Attacks Damage
 player_atk =300
 # Default Player Skills
-player_skills = {"heavy_atk":"400","leech_hp":"200","fireball":"500"}
+player_skills = {"heavy_atk":400,"leech_hp":200,"fireball":500}
 #Critical Multiplier
 crit_multi = 2
 # Default Parameters for Monster Stats
-mons_stats = {"name":"0","max_hp":"0","curr_hp":"0","max_mp":"0","curr_mp":"0","evasion":"0","crit":"0"}
+mons_stats = {"name":0,"max_hp":0,"curr_hp":0,"max_mp":0,"curr_mp":0,"evasion":0,"crit":0}
 # Default Parameters for Monster Status
-mons_status = {"regen":"0","mp_regen":"0","dot":"0"}
+mons_status = {"regen":0,"mp_regen":0,"dot":0}
 # Default Monster Attacks
 mons_atk = 200
 # Default Monster Skills
-mons_skills = {"smash":"400","poison_lick":"100"}
+mons_skills = {"smash":400,"poison_lick":100}
 
 #
 #
@@ -77,22 +77,10 @@ click.clear()
 #Monster Naming
 mons_rand_name = 0
 def mons_random_name_gen():
-    global mons_rand_name
-    mons_rand_name1 = str("Cupcakes")
-    mons_rand_name2 = str("Muffin Man")
-    mons_rand_name3 = str("Fruit Tart")
-    mons_rand_name4 = str("Crabs")
+    global mons_stats
+    mons_name_list = {1:"Cupcakes",2:"Muffin Man",3:"Fruit Tart",4:"Crabs"}
     mons_rand_name_draw = random.randint(1,4)
-    if mons_rand_name_draw == 1:
-        mons_rand_name = mons_rand_name1
-    elif mons_rand_name_draw == 2:
-        mons_rand_name = mons_rand_name2
-    elif mons_rand_name_draw == 3:
-        mons_rand_name = mons_rand_name3
-    elif mons_rand_name_draw == 4:
-        mons_rand_name = mons_rand_name4
-    else:
-        mons_rand_name = int("0")    
+    mons_stats["name"] = mons_name_list[mons_rand_name_draw]
     return mons_random_name_gen
     
 mons_name = input("Please name the monster that you will be fighting against: ")
