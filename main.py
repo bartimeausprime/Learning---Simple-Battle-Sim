@@ -73,15 +73,7 @@ loading_screen("Your adventure begins")
 input("Press enter to continue!")
 click.clear()
 
-#Monster Naming
-mons_rand_name = 0
-def mons_random_name_gen():
-    global mons_name
-    mons_name_list = {1:"Cupcakes",2:"Muffin Man",3:"Fruit Tart",4:"Crabs"}
-    mons_rand_name_draw = random.randint(1,4)
-    mons_name = mons_name_list[mons_rand_name_draw]
-    return mons_random_name_gen
-    
+#Monster Naming 
 mons_name = input("Please name the monster that you will be fighting against: ")
 time.sleep(0.9)
 click.clear()
@@ -89,12 +81,13 @@ loading_screen("Now spawning your very own monster")
 time.sleep(2.3)
 print("")
 if mons_name != "":
-	print(mons_name+"?","That's a pretty shitty name")
+    print(mons_name+"?","That's a pretty shitty name")
     print("")
-	time.sleep(0.7)
-	print("Well... whatever floats your boat..")
+    time.sleep(0.7)
+    print("Well... whatever floats your boat..")
 else:
-    mons_random_name_gen()
+    mons_name_list = ("Cupcakes","Tinkerbell","Crabs","Muffin Man")
+    mons_rand_name = random.choices(mons_name_list)
     mons_name = mons_rand_name
     print("You will be fighting a randomly named monster. His name is",mons_rand_name)
 time.sleep(4)
