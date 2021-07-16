@@ -3,7 +3,8 @@ player_attack = 0
 player_skills = 0
 player_defend = 0
 # Default Parameters for Player Stats
-player_stats = {"name":0,"max_hp":0,"curr_hp":0,"max_mp":0,"curr_mp":0,"evasion":0,"crit":0}
+player_name = 0
+player_stats = {"max_hp":0,"curr_hp":0,"max_mp":0,"curr_mp":0,"evasion":0,"crit":0}
 # Default Parameters for Player Status
 player_status = {"regen":0,"mp_regen":0,"dot":0}
 # Default Player Attacks Damage
@@ -13,7 +14,8 @@ player_skills = {"heavy_atk":400,"leech_hp":200,"fireball":500}
 #Critical Multiplier
 crit_multi = 2
 # Default Parameters for Monster Stats
-mons_stats = {"name":0,"max_hp":0,"curr_hp":0,"max_mp":0,"curr_mp":0,"evasion":0,"crit":0}
+mons_name = 0
+mons_stats = {"max_hp":0,"curr_hp":0,"max_mp":0,"curr_mp":0,"evasion":0,"crit":0}
 # Default Parameters for Monster Status
 mons_status = {"regen":0,"mp_regen":0,"dot":0}
 # Default Monster Attacks
@@ -67,20 +69,17 @@ else:
     print(player_name_default+", ""welcome to this simple test of a battle simulator with a monster.")
     player_name = player_name_default
 print("")
-time.sleep(2.0)
-print("Your short adventure begins...")
-time.sleep(1.0)
-print("")
+loading_screen("Your adventure begins")
 input("Press enter to continue!")
 click.clear()
 
 #Monster Naming
 mons_rand_name = 0
 def mons_random_name_gen():
-    global mons_stats
+    global mons_name
     mons_name_list = {1:"Cupcakes",2:"Muffin Man",3:"Fruit Tart",4:"Crabs"}
     mons_rand_name_draw = random.randint(1,4)
-    mons_stats["name"] = mons_name_list[mons_rand_name_draw]
+    mons_name = mons_name_list[mons_rand_name_draw]
     return mons_random_name_gen
     
 mons_name = input("Please name the monster that you will be fighting against: ")
@@ -91,6 +90,7 @@ time.sleep(2.3)
 print("")
 if mons_name != "":
 	print(mons_name+"?","That's a pretty shitty name")
+    print("")
 	time.sleep(0.7)
 	print("Well... whatever floats your boat..")
 else:
@@ -122,47 +122,25 @@ while difficulty_setting not in ("a","b","c"):
 #done
 if difficulty_setting == "a":
 	print("You're a chicken. Bawk bawk!")
-	player_max_health = int(3000)
-	player_max_mana = int(2000)
-	player_mana_regen = int(200)
-	player_evasion = int(30)
-	player_crit = int(30)
-	mons_max_health = int(3000)
-	mons_max_mana  =  int(2000)
-	mons_mana_regen = int(100)
-	mons_evasion = int(10)
-	mons_crit = int(10)
+    player_stats = {"max_hp":3000,"curr_hp":3000,"max_mp":2000,"curr_mp":2000,"evasion":30,"crit":30}
+    player_status = {"regen":0,"mp_regen":0,"dot":0}
+    mons_stats = {"max_hp":3000,"curr_hp":3000,"max_mp":2000,"curr_mp":2000,"evasion":10,"crit":10}
+    mons_status = {"regen":0,"mp_regen":0,"dot":0}
 elif difficulty_setting == "b":
 	print("You're just the same as everyone, big deal.")
-	player_max_health = int(3000)
-	player_max_mana = int(1500)
-	player_mana_regen = int(100)
-	player_evasion = int(25)
-	player_crit = int(35)
-	mons_max_health = int(4000)
-	mons_max_mana  = int(4000)
-	mons_mana_regen = int(150)
-	mons_evasion = int(15)
-	mons_crit =	int(15)
+    player_stats = {"max_hp":3000,"curr_hp":3000,"max_mp":1500,"curr_mp":1500,"evasion":25,"crit":35}
+    player_status = {"regen":0,"mp_regen":0,"dot":0}
+    mons_stats = {"max_hp":4000,"curr_hp":4000,"max_mp":4000,"curr_mp":4000,"evasion":15,"crit":15}
+    mons_status = {"regen":0,"mp_regen":0,"dot":0}
 elif difficulty_setting == "c":
 	print("Oh? So you think you're a big boy?")
-	player_max_health = int(3000)
-	player_max_mana =  int(1000)
-	player_mana_regen = int(60)
-	player_evasion = int(20)
-	player_crit = int(40)
-	mons_max_health = int(5000)
-	mons_max_mana  = int(5000)
-	mons_mana_regen = int(200)
-	mons_evasion = int(20)
-	mons_crit = int(20)
+    player_stats = {"max_hp":3000,"curr_hp":3000,"max_mp":1000,"curr_mp":1000,"evasion":20,"crit":40}
+    player_status = {"regen":0,"mp_regen":0,"dot":0}
+    mons_stats = {"max_hp":5000,"curr_hp":5000,"max_mp":5000,"curr_mp":5000,"evasion":20,"crit":20}
+    mons_status = {"regen":0,"mp_regen":0,"dot":0}
 else:
 	print("Good job numbnuts, you broke something..")
 	print("Are you too retarded to know what ABCs are?")
-player_curr_health = player_max_health
-player_curr_mana = player_max_mana
-mons_curr_health = mons_max_health
-mons_curr_mana = mons_max_mana
 loading_screen("Setting Difficulty")  
 click.clear()
 print("Now that everything is ready, the battle will start shortly")
@@ -182,29 +160,29 @@ click.clear()
 #Player Health Bar
 def player_hp(curr_hp,turn_dmg,max_hp):
     new_player_hp = curr_hp - turn_dmg
-    global player_curr_health
-    player_curr_health = int(new_player_hp)
+    global player_stats
+    player_stats["curr_hp"] = int(new_player_hp)
     print("Player Health:",str(new_player_hp)+"/"+str(max_hp))
     return player_hp
 #Monster Health Bar
 def mons_hp(curr_hp,turn_dmg,max_hp):
     new_mons_hp = curr_hp - turn_dmg
-    global mons_curr_health
-    mons_curr_health = int(new_mons_hp)
+    global mons_stats
+    mons_stats["curr_hp"] = int(new_mons_hp)
     print("Monster Health:",str(new_mons_hp)+"/"+str(max_hp))
     return mons_hp
 #Player Mana Bar
 def player_mp(curr_mp,turn_mp_use,max_mp):
     new_player_mp = curr_hp - turn_dmg
-    global player_curr_mana
-    player_curr_mana = new_player_mp
+    global player_stats
+    player_stats["curr_mp"] = new_player_mp
     print("Player Mana:",str(new_player_mp)+"/"+str(max_mp))
     return player_mp
 #Monster Mana Bar
 def mons_mp(curr_hp,turn_mp_use,max_mp):
     new_mons_mp = curr_hp - turn_dmg
-    global mons_curr_mana
-    mons_curr_mana = new_mons_mp
+    global mons_stats
+    mons_stats["curr_mp"] = new_mons_mp
     print("Monster Mana:",str(new_mons_mp)+"/"+str(max_mp))
     return mons_mp
 #Player Poison Status
@@ -213,16 +191,15 @@ def mons_mp(curr_hp,turn_mp_use,max_mp):
 ##Functions: Player Skills (Includes evasion and critical)
 #Player Basic Attack Calc
 def player_atk_dmg():
-    global crit_multi
-    global player_crit
-    global mons_evasion
+    global player_stats
+    global mons_stats
     global player_atk
     player_atk_raw = random.randint(250,350)
-    if random.randint(0,100) <= player_crit:
+    if random.randint(0,100) <= player_stats["crit"]:
         player_atk_crit = int(player_atk_raw * crit_multi)
     else:
         player_atk_crit = player_atk_raw
-    if random.randint (0,100) <= mons_evasion:
+    if random.randint (0,100) <= mons_stat["evasion"]:
         player_atk_out = 0
     else:
         player_atk_out = player_atk_crit
@@ -234,6 +211,7 @@ def player_heavy_atk_dmg():
     global player_crit
     global mons_evasion
     global player_heavy_atk
+    #delete above
     player_heavy_atk_raw = random.randint(380,460)
     if random.randint(0,100) <= player_crit:
         player_heavy_atk_crit = int(player_heavy_atk_raw * crit_multi)
@@ -251,6 +229,7 @@ def player_leech_hp_dmg():
     global player_crit
     global mons_evasion
     global player_leech_hp
+    #delete above
     player_leech_hp_raw = random.randint(150,200)
     if random.randint(0,100) <= player_crit:
         player_leech_hp_crit = int(player_leech_hp_raw * crit_multi)
@@ -268,6 +247,7 @@ def player_fireball_dmg():
     global player_crit
     global mons_evasion
     global player_fireball
+    #delete above
     player_fireball_raw = random.randint(500,700)
     if random.randint(0,100) <= player_crit:
         player_fireball_crit = int(player_fireball_raw * crit_multi)
@@ -286,6 +266,7 @@ def mons_atk_dmg():
     global crit_multi
     global mons_crit
     global player_evasion
+    #delete above
     global mons_atk
     mons_atk_raw = random.randint(150,250)
     if random.randint(0,100) <= mons_crit:
@@ -304,6 +285,7 @@ def mons_smash_dmg():
     global mons_crit
     global player_evasion
     global mons_smash
+    #delete above
     mons_smash_raw = random.randint(400,800)
     if random.randint(0,100) <= mons_crit:
         mons_smash_crit = int(mons_smash_raw * crit_multi)
@@ -321,6 +303,7 @@ def mons_lick_poison_dmg():
     global mons_crit
     global player_evasion
     global mons_lick_poison
+    #delete above 
     mons_lick_poison_raw = random.randint(50,100)
     if random.randint(0,100) <= mons_crit:
         mons_lick_poison_crit = int(mons_lick_poison_raw * crit_multi)
